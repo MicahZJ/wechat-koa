@@ -71,7 +71,7 @@ export default {
     },
     testLogin() {
 	    this.$router.push({
-		    path: "/about"
+		    path: "/homepage"
 	    });
     }
   }

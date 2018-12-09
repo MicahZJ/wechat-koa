@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "./views/login_admin/index.vue";
+import Login from "./views/login_admin/index";
+import AdminHomePage from './views/admin_homePage/index'
 
 Vue.use(Router);
 
@@ -13,6 +14,11 @@ export default new Router({
       name: "Login",
       component: Login
     },
+	  {
+		  path: "/homepage",
+		  name: "AdminHomePage",
+		  component: AdminHomePage
+	  },
     {
       path: "/about",
       name: "about",
