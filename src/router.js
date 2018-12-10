@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Login from "./views/login_admin/index";
-import AdminHomePage from './views/admin_homePage/index'
+import AdminHomePage from './views/admin_homePage/index';
+import AddInfo from './views/add_info/index';
 
 Vue.use(Router);
 
@@ -17,7 +18,19 @@ export default new Router({
 	  {
 		  path: "/homepage",
 		  name: "AdminHomePage",
-		  component: AdminHomePage
+		  component: AdminHomePage,
+		  // children: [
+			//   {
+			//   	path: 'addNew',
+			// 	  name: "AddInfo",
+			// 	  component: AddInfo
+			//   }
+		  // ]
+	  },
+	  {
+		  path: '/addNew',
+		  name: "AddInfo",
+		  component: AddInfo
 	  },
     {
       path: "/about",

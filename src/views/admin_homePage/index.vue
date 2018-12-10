@@ -4,17 +4,16 @@
     <!--搜索框-->
     <el-row>
       <el-col :span="3" class="grid">
-        <el-input
-          v-model="input"
-          placeholder="请输入内容"
-          size="mini"
-        ></el-input>
+        <el-input v-model="input" placeholder="请输入内容" size="mini">
+        </el-input>
       </el-col>
       <el-col :span="1" class="grid">
-        <el-button type="success"
-                   icon="el-icon-search"
-                   size="mini"
-                   @click="handleSelect">搜索</el-button
+        <el-button
+          type="success"
+          icon="el-icon-search"
+          size="mini"
+          @click="handleSelect"
+          >搜索</el-button
         >
       </el-col>
     </el-row>
@@ -54,20 +53,26 @@
     <br />
     <!--新增按钮-->
     <el-row>
-      <el-button type="success"
-                 icon="el-icon-circle-plus-outline"
-                 size="mini"
-                 round
-                 >新增</el-button>
-    <!--全删按钮-->
-      <el-button type="danger"
-                 icon="el-icon-delete"
-                 size="mini"
-                 round>全删</el-button>
+      <el-button
+        type="success"
+        icon="el-icon-circle-plus-outline"
+        size="mini"
+        @click="toAddPages()"
+        round
+        >新增</el-button
+      >
+      <!--全删按钮-->
+      <el-button type="danger" icon="el-icon-delete" size="mini" round
+        >全删</el-button
+      >
     </el-row>
     <br />
     <!--分页条-->
-    <el-pagination background layout="prev, pager, next" :total="100"></el-pagination>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="100"
+    ></el-pagination>
   </div>
 </template>
 
