@@ -69,20 +69,12 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    async adminLogin() {
-      let userInfo = {
-        userEmail: this.userInfo.username,
-        passWord: this.userInfo.pass
-      };
-      console.log('登录数据', userInfo)
-      let res = await getLoginInfo(userInfo)
-      if (res.code === 200) {
-        this.$router.push({
-          path: "/homepage"
-        });
-      } else {
-        alert(`${res.message}`)
-      }
+    async adminRegister() {
+      // let res = await getLoginInfo()
+      // console.log('数据', res)
+	    // this.$router.push({
+		  //   path: "/homepage"
+	    // });
     }
   }
 };

@@ -48,7 +48,16 @@ export default {
 		  this.$router.push({
 			  path: "/addNew"
 		  });
-	  }
+	  },
+  
+    /**
+     * 跳转修改页
+     */
+    toEditPage() {
+      this.$router.push({
+        path: "/editInfo"
+      });
+    },
   },
   components: {
     publicHeader

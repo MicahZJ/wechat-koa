@@ -37,16 +37,16 @@
       <el-table-column prop="address" label="地址"> </el-table-column>
       <el-table-column label="编辑" width="100">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" size="mini"
-            >编辑</el-button
-          >
+          <el-button
+                  type="primary"
+                  icon="el-icon-edit"
+                  size="mini"
+                  @click="toEditPage()">编辑</el-button>
         </template>
       </el-table-column>
       <el-table-column label="删除" width="100">
         <template slot-scope="scope">
-          <el-button type="danger" icon="el-icon-delete" size="mini"
-            >删除</el-button
-          >
+          <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -58,21 +58,17 @@
         icon="el-icon-circle-plus-outline"
         size="mini"
         @click="toAddPages()"
-        round
-        >新增</el-button
+        round>新增</el-button
       >
       <!--全删按钮-->
-      <el-button type="danger" icon="el-icon-delete" size="mini" round
-        >全删</el-button
-      >
+      <el-button type="danger" icon="el-icon-delete" size="mini" round>全删</el-button>
     </el-row>
     <br />
     <!--分页条-->
     <el-pagination
       background
       layout="prev, pager, next"
-      :total="100"
-    ></el-pagination>
+      :total="100"></el-pagination>
   </div>
 </template>
 
