@@ -1,4 +1,4 @@
-import { getLoginInfo } from '../../api/api'
+import { axiosPost } from '../../api/api'
 export default {
   data() {
     var checkName = (rule, value, callback) => {
@@ -38,50 +38,24 @@ export default {
     };
   },
   methods: {
-    Login(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          let userInfo = {
-            username: this.userInfo.username,
-            password: this.userInfo.pass
-          };
-          requestLogin(userInfo).then(data => {
-            let { msg, code, user } = data;
-            if (code !== 200) {
-              this.$message({
-                message: msg,
-                type: "error"
-              });
-            } else {
-              console.log(user);
-              sessionStorage.setItem("user", JSON.stringify(user));
-              this.$router.push({
-                path: "/dashboard"
-              });
-            }
-          });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    },
+    /**
+     * 登录
+     * @returns {Promise<void>}
+     */
     async adminLogin() {
-      let userInfo = {
+      let Api = '/api/login'
+      let requestData = {
         userEmail: this.userInfo.username,
         passWord: this.userInfo.pass
       };
-      console.log('登录数据', userInfo)
-      let res = await getLoginInfo(userInfo)
+      console.log('登录数据', requestData)
+      let res = await axiosPost(Api, requestData)
       if (res.code === 200) {
         this.$router.push({
           path: "/homepage"
         });
       } else {
-        alert(`${res.message}`)
+        alert(`${res.message}`);
       }
     }
   }

@@ -1,12 +1,14 @@
 import publicHeader from "components/header_public/index";
+import {axiosPost} from "../../api/api";
 
 export default {
 	data () {
 		return {
-			title: "",
-			link: "",
-			author: "",
-			tag: ""
+			id: '', // 序号
+			title: "", // 标题
+			author: "", // 作者
+			tag: "", // 显隐
+      textarea:'' // 文章内容
 		};
 	},
 	watch: {},
@@ -15,11 +17,45 @@ export default {
 		publicHeader
 	},
 	methods: {
+    
+    /**
+		 * 获取传参
+     */
+		getParams() {
+			let options = this.$route.query.options
+			console.log('传参', options)
+			this.id = options.id
+			this.title = options.title
+			this.author = options.name
+			this.tag = options.tag === 0 ? '隐藏': options.tag === 1 ? '显示' : '隐藏'
+			this.textarea = options.article
+		},
+  
 		/**
 		 * 保存新数据
 		 */
-		saveNewData() {
-			alert('success')
+		async saveNewData() {
+			let Api = '/api/activity/edit'
+			let requestData = {
+				id : this.id,
+        title : this.title,
+        author : this.author,
+        tag : this.tag === '隐藏' ? 0 : this.tag === '显示' ? 1 : 0,
+        textarea : this.textarea,
+			}
+			
+			const res = await axiosPost(Api, requestData)
+			if (res.code === 200) {
+        this.$alert('恭喜大王，已经修改成功', '修改结果', {
+          confirmButtonText: '已阅',
+          callback: action => {
+            this.$router.replace({
+              path: "/homepage"
+            })
+          }
+        });
+			}
+			// alert('success')
 		},
 	},
 	beforeCreate () {
@@ -45,6 +81,7 @@ export default {
 		* 实例挂载之后调用，但是并不是所有子组件也都一起挂载完成
 		*/
 		console.log ('5. mounted');
+		this.getParams()
 	},
 	beforeUpdate () {
 		/*

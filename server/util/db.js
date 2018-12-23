@@ -5,6 +5,7 @@ const db = mysql.createPool({
   password: '123456',   // 数据库密码
   database: 'KOA2-qa',  // 选中数据库
   port: 3306,
+  timezone:"08:00",
   multipleStatements: true//允许多条sql同时执行
 })
 

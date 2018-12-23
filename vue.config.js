@@ -49,8 +49,6 @@ module.exports = {
         .set("api", resolve("src/api"))
         .set("assets", resolve("src/assets"))
         .set("components", resolve("src/components"))
-        .set("layout", resolve("src/layout"))
-        .set("base", resolve("src/base"))
         .set("static", resolve("src/static"));
     // 修改 Loader 选项
     config.module
@@ -75,15 +73,15 @@ module.exports = {
     https: false, // https:{type:Boolean}
     open: true, //配置自动启动浏览器
     // proxy: 'http://localhost:3000', // 配置跨域处理,只有一个代理
-    proxy: {
-      "/api": {
-        target: "<url>",
-        ws: true,
-        changeOrigin: true
-      },
-      "/foo": {
-        target: "<other_url>"
-      }
-    } // 配置多个代理
+    // proxy: {
+      // "/api": {
+      //   target: "<url>",
+      //   ws: true,
+      //   changeOrigin: true
+      // },
+      // "/foo": {
+      //   target: "<other_url>"
+      // }
+    // } // 配置多个代理
   }
 };

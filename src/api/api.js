@@ -1,22 +1,28 @@
 import axios from "axios";
 import webConfig from '../views/webConfig'
 
-export function getLoginInfo (userInfo) {
-  let url = webConfig.apiPath + '/api/login'
-  let data = {
-    userEmail: userInfo.userEmail,
-    passWord: userInfo.passWord
-  }
+export function axiosGet (url, params) {
+  url = webConfig.apiPath + url
   
-  console.log('数据2', data)
-  return axios.post(url, {
-    userEmail: userInfo.userEmail,
-    passWord: userInfo.passWord
-  })
+  return axios.get(url, params)
     .then((res) => {
     return Promise.resolve (res.data)
     })
     .catch((ERR) => {
-      console.log('登录报错', ERR)
+      alert(ERR)
+      console.log('接口报错', ERR)
+    })
+}
+
+export function axiosPost (url, params) {
+  url = webConfig.apiPath + url
+  
+  return axios.post(url, params)
+    .then((res) => {
+      return Promise.resolve (res.data)
+    })
+    .catch((ERR) => {
+      alert(ERR)
+      console.log('接口报错', ERR)
     })
 }

@@ -5,9 +5,6 @@
       <el-form-item label="标题">
         <el-input v-model="title"></el-input>
       </el-form-item>
-      <el-form-item label="链接">
-        <el-input v-model="link"></el-input>
-      </el-form-item>
       <el-form-item label="作者">
         <el-input v-model="author"></el-input>
       </el-form-item>
@@ -17,8 +14,16 @@
           <el-option label="隐藏" value="0"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="内容">
+        <el-input
+          type="textarea"
+          :rows="10"
+          placeholder="请输入内容"
+          v-model="textarea">
+        </el-input>
+      </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="saveNewData()">立即添加</el-button>
+        <el-button type="primary" @click="saveNewData()">确认修改</el-button>
       </el-form-item>
     </el-form>
   </div>

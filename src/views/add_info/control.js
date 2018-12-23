@@ -1,12 +1,47 @@
 import publicHeader from "components/header_public/index";
+import {axiosPost} from "../../api/api";
 
 export default {
 	data () {
+    let checkContent = (rule, value, callback) => {
+      let that = this;
+      if (value === "") {
+        return callback(new Error("不能为空"));
+      } else {
+        callback();
+      }
+    };
 		return {
 			title: "",
-			link: "",
 			author: "",
-			tag: ""
+			tag: "隐藏",
+      textarea: "",
+      rules: {
+        title: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        author: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        tag: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        textarea: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+      }
 		};
 	},
 	watch: {},
@@ -18,8 +53,27 @@ export default {
 		/**
 		 * 保存新数据
 		 */
-		saveNewData() {
-			alert('success')
+		async saveNewData() {
+			// alert('success')
+			let Api = '/api/activity/addNew'
+			let requestData ={
+        article: this.textarea,
+        author: this.author,
+        tag: 0,
+        title: this.title,
+			}
+			
+			const res = await axiosPost(Api, requestData)
+			if (res.code === 200) {
+        this.$alert('恭喜大王，新增一条记录', '修改结果', {
+          confirmButtonText: '已阅',
+          callback: action => {
+            this.$router.replace({
+              path: "/homepage"
+            })
+          }
+        });
+			}
 		},
 	},
 	beforeCreate () {
