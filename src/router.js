@@ -22,31 +22,31 @@ export default new Router({
       component: Login
     },
     {
-      path: "/register",
-      name: "Register",
-      component: Register
+      path: '/addNew',
+      name: "AddInfo",
+      component: AddInfo
     },
-	  {
-		  path: "/homepage",
-		  name: "AdminHomePage",
-		  component: AdminHomePage,
-		  // children: [
-			//   {
-			//   	path: 'addNew',
-			// 	  name: "AddInfo",
-			// 	  component: AddInfo
-			//   }
-		  // ]
-	  },
-	  {
-		  path: '/addNew',
-		  name: "AddInfo",
-		  component: AddInfo
-	  },
     {
       path: '/editInfo',
       name: "EditInfo",
       component: EditInfo
+    },
+    {
+      path: "/homepage",
+      name: "AdminHomePage",
+      component: AdminHomePage,
+      // children: [
+      //   {
+      //   	path: 'addNew',
+      // 	  name: "AddInfo",
+      // 	  component: AddInfo
+      //   }
+      // ]
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: Register
     },
     {
       path: "/about",
