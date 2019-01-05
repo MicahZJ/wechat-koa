@@ -6,7 +6,6 @@ if (process.env.NODE_ENV === 'production') {
   api = {
     apiURL: '/',
     publicPath: '/',
-    rootUrl: '/',
     apiPath: '/',
     staticPath: '/',
   }
@@ -15,7 +14,6 @@ if (process.env.NODE_ENV === 'production') {
   api = {
     apiURL: '/',
     publicPath: '/',
-    rootUrl: '/',
     apiPath: 'http://localhost:3000',
     staticPath: '/',
   }
@@ -23,7 +21,6 @@ if (process.env.NODE_ENV === 'production') {
 
 const config = {
   api: api,
-  rootUrl: api.rootUrl,
   publicPath: api.publicPath,
   staticPath: api.staticPath,
   apiPath: api.apiPath
