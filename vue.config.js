@@ -1,4 +1,9 @@
 const path = require("path");
+const vConsolePlugin = require("vconsole-webpack-plugin"); // 引入 移动端模拟开发者工具 插件 （另：https://github.com/liriliri/eruda）
+const CompressionPlugin = require("compression-webpack-plugin"); //Gzip
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin; //Webpack包文件分析器
+
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -60,7 +65,37 @@ module.exports = {
         return options;
       });
   },
-
+  //调整 webpack 配置 https://cli.vuejs.org/zh/guide/webpack.html#%E7%AE%80%E5%8D%95%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F
+  configureWebpack: config => {
+    //生产and测试环境
+    let pluginsPro = [
+      new CompressionPlugin({
+        //文件开启Gzip，也可以通过服务端(如：nginx)(https://github.com/webpack-contrib/compression-webpack-plugin)
+        filename: "[path].gz[query]",
+        algorithm: "gzip",
+        test: new RegExp("\\.(" + ["js", "css"].join("|") + ")$"),
+        threshold: 8192,
+        minRatio: 0.8
+      }),
+      //	Webpack包文件分析器(https://github.com/webpack-contrib/webpack-bundle-analyzer)
+      new BundleAnalyzerPlugin()
+    ];
+    //开发环境
+    let pluginsDev = [
+      //移动端模拟开发者工具(https://github.com/diamont1001/vconsole-webpack-plugin  https://github.com/Tencent/vConsole)
+      new vConsolePlugin({
+        filter: [], // 需要过滤的入口文件
+        enable: false // 发布代码前记得改回 false
+      })
+    ];
+    if (process.env.NODE_ENV === "production") {
+      // 为生产环境修改配置...process.env.NODE_ENV !== 'development'
+      config.plugins = [...config.plugins, ...pluginsPro];
+    } else {
+      // 为开发环境修改配置...
+      config.plugins = [...config.plugins, ...pluginsDev];
+    }
+  },
   // productionSourceMap：{ type:Bollean,default:true } 生产源映射
   // 如果您不需要生产时的源映射，那么将此设置为false可以加速生产构建
   productionSourceMap: false,
@@ -79,20 +114,21 @@ module.exports = {
   },
   devServer: {
     port: 8085, // 端口号
-    host: "localhost",
-    https: true, // https:{type:Boolean}
+    // host: "localhost",
+    host: "0.0.0.0",
+    https: false, // https:{type:Boolean}
     open: true, //配置自动启动浏览器
-    hotOnly: true // 热更新
-    // proxy: 'http://localhost:3000', // 配置跨域处理,只有一个代理
+    hotOnly: true, // 热更新
+    proxy: "http://localhost:3000" // 配置跨域处理,只有一个代理
     // proxy: {
-    // "/api": {
-    //   target: "<url>",
-    //   ws: true,
-    //   changeOrigin: true
-    // },
-    // "/foo": {
-    //   target: "<other_url>"
-    // }
+    //   "/api": {
+    //     target: "<url>",
+    //     ws: true,
+    //     changeOrigin: true
+    //   }
+    //   // "/foo": {
+    //   //   target: "<other_url>"
+    //   // }
     // } // 配置多个代理
   }
 };

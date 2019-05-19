@@ -11,13 +11,6 @@
   },
   "dependencies": {
     "element-ui": "^2.4.5",
-    "koa": "^2.6.2",
-    "koa-bodyparser": "^4.2.1",
-    "koa-mysql-session": "^0.0.2",
-    "koa-router": "^7.4.0",
-    "koa-session-minimal": "^3.0.4",
-    "koa2-cors": "^2.0.6",
-    "mysql": "^2.16.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -33,13 +26,16 @@
     "axios": "^0.18.0",
     "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
+    "compression-webpack-plugin": "^2.0.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "mocha": "^5.2.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "supertest": "^3.3.0",
+    "vconsole-webpack-plugin": "^1.4.2",
     "vue-cli-plugin-element": "^1.0.0",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.5.17",
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }

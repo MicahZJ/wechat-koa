@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === "production") {
   api = {
     apiURL: "/",
     publicPath: "/",
-    apiPath: "https://www.micahzj.com/",
+    apiPath: "https://www.micahzj.com",
     staticPath: "/"
   };
 } else if (process.env.NODE_ENV === "development") {

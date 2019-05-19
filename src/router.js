@@ -1,10 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "./views/login_admin/index";
-import Register from "./views/register_admin/index";
-import AdminHomePage from './views/admin_homePage/index';
-import AddInfo from './views/add_info/index';
-import EditInfo from './views/edit_info/index';
+const Login = () => import("./views/login_admin/index");
+const Register = () => import("./views/register_admin/index");
+const AdminHomePage = () => import("./views/admin_homePage/index");
+const AddInfo = () => import("./views/add_info/index");
+const EditInfo = () => import("./views/edit_info/index");
+// import Login from "./views/login_admin/index";
+// import Register from "./views/register_admin/index";
+// import AdminHomePage from "./views/admin_homePage/index";
+// import AddInfo from "./views/add_info/index";
+// import EditInfo from "./views/edit_info/index";
 
 Vue.use(Router);
 
@@ -14,7 +19,7 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: '/login',
+      redirect: "/login"
     },
     {
       path: "/login",
@@ -22,19 +27,19 @@ export default new Router({
       component: Login
     },
     {
-      path: '/addNew',
+      path: "/addNew",
       name: "AddInfo",
       component: AddInfo
     },
     {
-      path: '/editInfo',
+      path: "/editInfo",
       name: "EditInfo",
       component: EditInfo
     },
     {
       path: "/homepage",
       name: "AdminHomePage",
-      component: AdminHomePage,
+      component: AdminHomePage
       // children: [
       //   {
       //   	path: 'addNew',
@@ -56,7 +61,7 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/About.vue")
-    },
+    }
     // {
     //   path: "/login",
     //   name: "Login",
