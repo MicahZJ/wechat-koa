@@ -1,25 +1,9 @@
-import * as types from './mutation-types';
-import * as API from '../api/config'
-import {axiosPost} from '../api/api'
+import * as types from "./mutation-types";
 
-export const actionsSetUserInfo = ({ commit, state }, userInfo) => {
-  commit(types.SET_USERINFO, userInfo);
-}
+export const actionsSetUserInfo = ({ commit }, res) => {
+  commit(types.SET_USERINFO, res);
+};
 
-export const loginToken = async ({ commit, state }, data) => {
-  let Api = API.login
-      let requestData = {
-        userEmail: data.username,
-        passWord: data.pass
-      };
-  console.log('登录数据', requestData)
-  let res = await axiosPost(Api, requestData)
-  if (res.code === 200) {
-    commit(types.SET_TOKEN, res.data);
-    this.$router.push({
-          path: "/homepage"
-    })
-  } else {
-    commit(types.SET_TOKEN_ERR, res.data);
-  }
-}
+export const loginToken = async ({ commit }, res) => {
+  commit(types.SET_TOKEN, res);
+};

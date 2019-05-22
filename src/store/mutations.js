@@ -1,17 +1,17 @@
-import * as types from './mutation-types'
+import * as types from "./mutation-types";
 
 const mutations = {
-  [types.SET_USERINFO](state, data) {
-    state.userInfo = data;
+  [types.SET_USERINFO](state, payload) {
+    state.userInfo = payload;
   },
 
-  [types.SET_TOKEN](state, data) {
-    state.token = data
+  [types.SET_TOKEN](state, payload) {
+    state.token = payload;
   },
 
-  [types.SET_TOKEN_ERR](state, data) {
-    state.token_err = data
+  [types.SET_TOKEN_ERR](state, payload) {
+    state.token_err = payload;
   }
-}
+};
 
-export default mutations
+export default mutations;
