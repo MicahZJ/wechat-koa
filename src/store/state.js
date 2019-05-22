@@ -1,5 +1,6 @@
 const state = {
   token: {},
-  userInfo: {}
+  token_err: {},
+  userInfo: {},
 }
 export default state
