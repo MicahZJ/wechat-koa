@@ -1,5 +1,5 @@
+import { mapGetters } from "vuex";
 import publicHeader from "components/header_public/index";
-import { axiosGet, axiosPost } from "../../api/api";
 
 export default {
   data() {
@@ -57,7 +57,7 @@ export default {
         limit: 10
       }
     
-      const res = await axiosPost(Api, requestData)
+      const res = await this.$Http.axiosPost(Api, requestData)
       if (res.code === 200) {
         this.tableData = this.formatList(res.data.articleList)
         this.totalLength =res.data.totalLength
@@ -116,7 +116,7 @@ export default {
         deleteStatus: 0
       }
       
-      const res = await axiosPost(Api, requestData)
+      const res = await this.$Http.axiosPost(Api, requestData)
       if (res.code === 200) {
         this.$alert('恭喜大王，已经删除成功', '删除结果', {
           confirmButtonText: '已阅',
@@ -195,7 +195,7 @@ export default {
         deleteStatus: 1
       }
   
-      const res = await axiosPost(Api, requestData)
+      const res = await this.$Http.axiosPost(Api, requestData)
       if (res.code === 200) {
         setTimeout(() => {
           this.getArticleList()
@@ -205,6 +205,7 @@ export default {
     
   },
   computed:{
+    ...mapGetters(["userInfo"]),
     tables() {
       let search=this.search;
       if(search){

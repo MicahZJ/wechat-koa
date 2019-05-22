@@ -1,4 +1,5 @@
-import { axiosPost } from '../../api/api'
+import { mapMutations, mapActions } from "vuex";
+
 export default {
   data() {
     var checkName = (rule, value, callback) => {
@@ -49,7 +50,7 @@ export default {
         passWord: this.userInfo.pass
       };
       console.log('登录数据', requestData)
-      let res = await axiosPost(Api, requestData)
+      let res = await this.$Http.axiosPost(Api, requestData)
       if (res.code === 200) {
         this.$router.push({
           path: "/homepage"
@@ -57,6 +58,16 @@ export default {
       } else {
         alert(`${res.message}`);
       }
-    }
+      let newUserInfo = Object.assign({},this.userInfo)
+      this.setInfo(newUserInfo)
+    },
+
+    ...mapMutations({
+      setInfo: 'SET_USERINFO'
+    }),
+
+    // ...mapActions([
+    //   'actionsSetUserInfo'
+    // ])
   }
 };

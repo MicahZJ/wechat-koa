@@ -55,7 +55,6 @@ export default {
           }
         });
 			}
-			// alert('success')
 		},
 	},
 	beforeCreate () {
