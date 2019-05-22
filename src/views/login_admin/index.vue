@@ -11,7 +11,8 @@
 					</el-form-item>
 					<el-form-item>
 						<div class="operator">
-							<el-button type="primary" @click="adminLogin('userInfo')">登录</el-button>
+							<el-button type="primary" @click="adminLogin()">登录</el-button>
+							<!-- <el-button type="primary" @click="loginToken">登录</el-button> -->
 							<el-button @click="resetForm('userInfo')">重置</el-button>
 						</div>
 					</el-form-item>

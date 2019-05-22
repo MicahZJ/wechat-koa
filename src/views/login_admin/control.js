@@ -44,27 +44,33 @@ export default {
      * @returns {Promise<void>}
      */
     async adminLogin() {
-      let Api = '/api/login'
-      let requestData = {
-        userEmail: this.userInfo.username,
-        passWord: this.userInfo.pass
-      };
-      console.log('登录数据', requestData)
-      let res = await this.$Http.axiosPost(Api, requestData)
-      if (res.code === 200) {
-        this.$router.push({
-          path: "/homepage"
-        });
-      } else {
-        alert(`${res.message}`);
-      }
+      // let Api = '/api/login'
+      // let requestData = {
+      //   userEmail: this.userInfo.username,
+      //   passWord: this.userInfo.pass
+      // };
+      // console.log('登录数据', requestData)
+      // let res = await this.$Http.axiosPost(Api, requestData)
+      // if (res.code === 200) {
+      //   this.$router.push({
+      //     path: "/homepage"
+      //   });
+      // } else {
+      //   alert(`${res.message}`);
+      // }
       let newUserInfo = Object.assign({},this.userInfo)
-      this.setInfo(newUserInfo)
+      this.loginToken(newUserInfo)
+      // this.setInfo(newUserInfo)
+      // this.actionsSetUserInfo(newUserInfo)
     },
 
-    ...mapMutations({
-      setInfo: 'SET_USERINFO'
-    }),
+    ...mapActions([
+      'loginToken'
+    ])
+
+    // ...mapMutations({
+    //   setInfo: 'SET_USERINFO'
+    // }),
 
     // ...mapActions([
     //   'actionsSetUserInfo'
