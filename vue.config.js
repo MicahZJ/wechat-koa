@@ -99,7 +99,11 @@ module.exports = {
   // productionSourceMap：{ type:Bollean,default:true } 生产源映射
   // 如果您不需要生产时的源映射，那么将此设置为false可以加速生产构建
   productionSourceMap: false,
-  // devServer:{type:Object} 3个属性host,port,https
+  // 3个属性host,port,https
+  devServer:{
+    disableHostCheck: true, // 禁用webpack热重载检查 解决热更新失效问题
+    // hotOnly: true,
+  }, 
   // 它支持webPack-dev-server的所有选项
   // css相关配置
   css: {

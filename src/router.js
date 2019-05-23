@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Store from './store/index'
 
 // 懒加载组件
 const Login = () => import("./views/login_admin/index");
@@ -88,8 +87,8 @@ const routers = new Router({
 
 routers.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) { // 当前组件需要登录权限
-    if (Store) { // 有权限
-      if(to.path === '/'){
+    if (localStorage.getItem('token')) { // 有权限
+      if(to.path === '/login'){
         //登录状态下 访问login.vue页面 会跳到homepage.vue
         next({path: '/homepage'});
       }else{

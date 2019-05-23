@@ -5,6 +5,10 @@ const mutations = {
     state.userInfo = payload;
   },
 
+  [types.SET_STATUS](state, payload) {
+    state.status = payload;
+  },
+
   [types.SET_TOKEN](state, payload) {
     state.token = payload;
   },

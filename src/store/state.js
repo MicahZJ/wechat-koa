@@ -1,6 +1,8 @@
 const state = {
-  token: {},
-  token_err: {},
+  token: localStorage.getItem('token') || '',
+  token_err: '',
+  status: '',
   userInfo: {},
 }
+
 export default state
