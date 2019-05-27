@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === "production") {
     apiURL: "/",
     publicPath: "/",
     // apiPath: "https://www.micahzj.com",
-    apiPath: 'http://localhost:3000',
+    apiPath: "http://localhost:3000",
     staticPath: "/"
   };
 }
