@@ -49,7 +49,7 @@ export default {
         passWord: this.userInfo.pass
       };
       let newUserInfo = Object.assign({}, requestData);
-      let res = await this.login(newUserInfo)
+      let res = await this.login(newUserInfo);
 
       if (res.code === 200) {
         this.$router.replace({

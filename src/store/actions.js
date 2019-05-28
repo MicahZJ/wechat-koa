@@ -21,8 +21,14 @@ export const login = ({ commit }, data) => {
         let resP = res.data;
         if (resP.code === 200) {
           console.log("token", resP);
-          localStorage.setItem("token", resP.data.loginToken);
-          let token = Object.assign({}, resP.data.loginToken);
+          localStorage.setItem(
+            "token",
+            resP.data.id + " " + resP.data.loginToken
+          );
+          let token = Object.assign(
+            {},
+            resP.data.id + " " + resP.data.loginToken
+          );
           commit(types.SET_TOKEN, token);
         }
         resolve(resP);
