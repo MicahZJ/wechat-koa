@@ -27,3 +27,51 @@
     &.router-link-exact-active
       color #42b983
 </style>
+<script>
+import { mapMutations, mapActions } from "vuex";
+export default {
+  data () {
+    return {
+
+    }
+  },
+  created() {
+    this.axiosIntercept()
+  },
+  methods: {
+    /**
+     * 请求拦截
+     */
+    axiosIntercept() {
+      let that = this
+      this.$Axios.interceptors.response.use(
+      async (response) => {
+        let res = response.data
+        console.log('res', res)
+        if (res.code === 50014){
+          let flag = await that.loginOut()
+          localStorage.removeItem('token')
+          if (flag) {
+             this.$alert('登录状态已过期', '小提示', {
+            confirmButtonText: '确定',
+            callback: action => {
+            this.$router.replace({
+              path: "/login"
+            })  
+            }
+          })
+          }
+        }
+        return response
+      }, 
+      (err) => {
+        console.log('err报错',err)
+        throw err
+      }
+    )
+    },
+    ...mapActions(["loginOut"]),
+  }
+}
+</script>
+

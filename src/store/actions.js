@@ -40,3 +40,10 @@ export const login = ({ commit }, data) => {
       });
   });
 };
+
+export const loginOut = async ({ commit }, data) => {
+  return new Promise((resolve, reject) => {
+    commit(types.SET_TOKEN, '');
+    resolve(true)
+  })
+};
