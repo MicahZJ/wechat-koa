@@ -29,7 +29,9 @@ export const login = ({ commit }, data) => {
             {},
             resP.data.id + " " + resP.data.loginToken
           );
+          let userInfo = Object.assign({}, { nick: resP.data.nick });
           commit(types.SET_TOKEN, token);
+          commit(types.SET_USERINFO, userInfo);
         }
         resolve(resP);
       })
@@ -41,9 +43,9 @@ export const login = ({ commit }, data) => {
   });
 };
 
-export const loginOut = async ({ commit }, data) => {
+export const loginOut = async ({ commit }) => {
   return new Promise((resolve, reject) => {
-    commit(types.SET_TOKEN, '');
-    resolve(true)
-  })
+    commit(types.SET_TOKEN, "");
+    resolve(true);
+  });
 };

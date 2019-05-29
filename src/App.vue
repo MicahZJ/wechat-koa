@@ -52,7 +52,7 @@ export default {
           let flag = await that.loginOut()
           localStorage.removeItem('token')
           if (flag) {
-             this.$alert('登录状态已过期', '小提示', {
+             this.$alert('登录失效', '小提示', {
             confirmButtonText: '确定',
             callback: action => {
             this.$router.replace({
