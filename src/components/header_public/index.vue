@@ -1,7 +1,13 @@
 <template>
   <div id="hello">
-    <el-menu class="el-menu-wrapper" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-      <el-menu-item index="1"><router-link to="/homePage">处理中心</router-link></el-menu-item>
+    <el-menu class="el-menu-wrapper" 
+             mode="horizontal" 
+             background-color="#545c64" 
+             text-color="#fff" 
+             active-text-color="#ffd04b"
+             :default-active="activeIndex"
+             @select="handleSelect">
+      <el-menu-item index="1">处理中心</el-menu-item>
       <el-submenu index="2">
         <template slot="title">我的工作台</template>
         <el-menu-item index="2-1">选项1</el-menu-item>
@@ -12,14 +18,14 @@
         <a href="" target="_blank">关于我们</a>
       </el-menu-item>
       <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
+        <el-dropdown @command="handleCommand">
           <span class="heart-class"></span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>编辑</el-dropdown-item>
-            <el-dropdown-item>登出</el-dropdown-item>
+            <el-dropdown-item command="1">编辑</el-dropdown-item>
+            <el-dropdown-item command="2">登出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span class="nick-class">王小虎</span>
+        <span class="nick-class">{{info.nick}}</span>
     </el-header>
     </el-menu>
     <br>
