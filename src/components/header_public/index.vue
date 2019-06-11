@@ -1,6 +1,11 @@
 <template>
   <div id="hello">
-    <el-menu class="el-menu-wrapper" mode="horizontal" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+    <el-menu class="el-menu-wrapper" 
+             mode="horizontal" 
+             background-color="#545c64" 
+             text-color="#fff" 
+             active-text-color="#ffd04b"
+             @select="handleSelect">
       <el-menu-item index="1">
         <router-link to="/homePage">
           处理中心
@@ -28,6 +33,7 @@
       </el-header>
     </el-menu>
     <br />
+    <router-view />
   </div>
 </template>
 

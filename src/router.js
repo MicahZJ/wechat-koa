@@ -3,15 +3,16 @@ import Router from "vue-router";
 
 // 懒加载组件
 const Login = () => import("./views/login_admin/index");
-const Register = () => import("./views/register_admin/index");
+const Register = () => import("./views/signIn_admin/index");
+const EditInfo = () => import("./views/edit_userInfo/index");
 const AdminHomePage = () => import("./views/admin_homePage/index");
-const AddInfo = () => import("./views/add_info/index");
-const EditInfo = () => import("./views/edit_info/index");
+const AddArticle = () => import("./views/add_article/index");
+const editArticle = () => import("./views/edit_article/index");
 // import Login from "./views/login_admin/index";
 // import Register from "./views/register_admin/index";
 // import AdminHomePage from "./views/admin_homePage/index";
-// import AddInfo from "./views/add_info/index";
-// import EditInfo from "./views/edit_info/index";
+// import AddArticle from "./views/add_info/index";
+// import editArticle from "./views/edit_info/index";
 
 Vue.use(Router);
 
@@ -29,6 +30,22 @@ const routers = new Router({
       component: Login,
       meta: {
         requireAuth: false
+      },
+    },
+    {
+      path: '/edit',
+      name: "edit",
+      component: EditInfo,
+      meta: {
+        requireAuth: true
+      },
+    },
+    {
+      path: "/register",
+      name: "Register",
+      component: Register,
+      meta: {
+        requireAuth: false
       }
     },
     {
@@ -41,31 +58,23 @@ const routers = new Router({
       // children: [
       //   {
       //   	path: 'addNew',
-      // 	  name: "AddInfo",
-      // 	  component: AddInfo
+      // 	  name: "AddArticle",
+      // 	  component: AddArticle
       //   }
       // ]
     },
     {
       path: "/addNew",
-      name: "AddInfo",
-      component: AddInfo,
+      name: "AddArticle",
+      component: AddArticle,
       meta: {
         requireAuth: true
       }
     },
     {
-      path: "/editInfo",
-      name: "EditInfo",
-      component: EditInfo,
-      meta: {
-        requireAuth: true
-      }
-    },
-    {
-      path: "/register",
-      name: "Register",
-      component: Register,
+      path: "/editArticle",
+      name: "editArticle",
+      component: editArticle,
       meta: {
         requireAuth: true
       }

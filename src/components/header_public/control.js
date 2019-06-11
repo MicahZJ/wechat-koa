@@ -94,10 +94,9 @@ export default {
      * 跳转编辑页
      */
     toEditInfoPage() {
-      this.$alert("暂时还没写", "无题", {
-        confirmButtonText: "确定",
-        callback: action => {}
-      });
+      this.$router.push({
+        path: '/edit'
+      })
     }
   }
 };

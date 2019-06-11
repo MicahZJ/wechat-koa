@@ -7,13 +7,17 @@
 						<el-input type="text" v-model="userInfo.username" auto-complete="off" placeholder="请输入邮箱"></el-input>
 					</el-form-item>
 					<el-form-item prop="pass">
-						<el-input type="password" v-model="userInfo.pass" auto-complete="off" placeholder="请输入密码"></el-input>
+						<el-input type="password" 
+											v-model="userInfo.pass" 
+											auto-complete="off" 
+											placeholder="请输入密码"
+											@keyup.enter.native="adminLogin()"></el-input>
 					</el-form-item>
 					<el-form-item>
 						<div class="operator">
 							<el-button type="primary" @click="adminLogin()">登录</el-button>
 							<!-- <el-button type="primary" @click="loginToken">登录</el-button> -->
-							<el-button @click="resetForm('userInfo')">重置</el-button>
+							<el-button @click="signIn()">注册</el-button>
 						</div>
 					</el-form-item>
 				</el-form>

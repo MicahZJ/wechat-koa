@@ -63,7 +63,7 @@ export default {
       // this.actionsSetUserInfo(newUserInfo)
     },
 
-    ...mapActions(["login"])
+    ...mapActions(["login"]),
 
     // ...mapMutations({
     //   setInfo: 'SET_USERINFO'
@@ -72,5 +72,14 @@ export default {
     // ...mapActions([
     //   'actionsSetUserInfo'
     // ])
+
+    /**
+     * 注册
+     */
+    async signIn() {
+      this.$router.push({
+        path: '/register'
+      })
+    },
   }
 };

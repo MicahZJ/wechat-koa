@@ -1,14 +1,47 @@
-import publicHeader from "components/header_public/index";
+import publicHeader from "components/header_public";
 import {axiosPost} from "../../api/api";
 
 export default {
 	data () {
+    let checkContent = (rule, value, callback) => {
+      let that = this;
+      if (value === "") {
+        return callback(new Error("不能为空"));
+      } else {
+        callback();
+      }
+    };
 		return {
-			id: '', // 序号
-			title: "", // 标题
-			author: "", // 作者
-			tag: "", // 显隐
-      textarea:'' // 文章内容
+			title: "",
+			author: "",
+			tag: "隐藏",
+      textarea: "",
+      rules: {
+        title: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        author: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        tag: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        textarea: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+      }
 		};
 	},
 	watch: {},
@@ -17,36 +50,22 @@ export default {
 		publicHeader
 	},
 	methods: {
-    
-    /**
-		 * 获取传参
-     */
-		getParams() {
-			let options = this.$route.query.options
-			console.log('传参', options)
-			this.id = options.id
-			this.title = options.title
-			this.author = options.name
-			this.tag = options.tag === 0 ? '隐藏': options.tag === 1 ? '显示' : '隐藏'
-			this.textarea = options.article
-		},
-  
 		/**
 		 * 保存新数据
 		 */
 		async saveNewData() {
-			let Api = '/api/activity/edit'
-			let requestData = {
-				id : this.id,
-        title : this.title,
-        author : this.author,
-        tag : this.tag === '隐藏' ? 0 : this.tag === '显示' ? 1 : 0,
-        textarea : this.textarea,
+			// alert('success')
+			let Api = '/api/activity/addNew'
+			let requestData ={
+        article: this.textarea,
+        author: this.author,
+        tag: 0,
+        title: this.title,
 			}
 			
 			const res = await axiosPost(Api, requestData)
 			if (res.code === 200) {
-        this.$alert('恭喜大王，已经修改成功', '修改结果', {
+        this.$alert('恭喜大王，新增一条记录', '修改结果', {
           confirmButtonText: '已阅',
           callback: action => {
             this.$router.replace({
@@ -80,7 +99,6 @@ export default {
 		* 实例挂载之后调用，但是并不是所有子组件也都一起挂载完成
 		*/
 		console.log ('5. mounted');
-		this.getParams()
 	},
 	beforeUpdate () {
 		/*
