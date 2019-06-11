@@ -1,24 +1,24 @@
 export default {
   data() {
     return {
-      imageUrl: ''
+      imageUrl: "",
     };
   },
   methods: {
     /**
      * 获取上传之后的图片流
-     * @param {*} res 
-     * @param {*} file 图片文件
      */
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+    coverUpLoad(options) { 
     },
+
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
+
+      const isPNG = file.type === 'image/png';
       const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+      if (!isJPG || !isPNG) {
+        this.$message.error('上传头像图片只能是 JPG 或者 PNG 格式!');
       }
       if (!isLt2M) {
         this.$message.error('上传头像图片大小不能超过 2MB!');
@@ -26,10 +26,8 @@ export default {
       return isJPG && isLt2M;
     }
   },
-  computed: {
-  },
-  components: {
-  },
+  computed: {},
+  components: {},
   beforeCreate() {
     /*
      * 实例初始化后，创建完成之前被调用

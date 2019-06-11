@@ -55,15 +55,15 @@ module.exports = {
         .set("assets", resolve("src/assets"))
         .set("components", resolve("src/components"))
         .set("static", resolve("src/static"));
-      // 修改 Loader 选项
-      config.module
-        .rule("vue")
-        .use("vue-loader")
-        .loader("vue-loader")
-        .tap(options => {
-          // 修改它的选项...
-          return options;
-        });
+    // 修改 Loader 选项
+    config.module
+      .rule("vue")
+      .use("vue-loader")
+      .loader("vue-loader")
+      .tap(options => {
+        // 修改它的选项...
+        return options;
+      });
   },
   //调整 webpack 配置 https://cli.vuejs.org/zh/guide/webpack.html#%E7%AE%80%E5%8D%95%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F
   configureWebpack: config => {
