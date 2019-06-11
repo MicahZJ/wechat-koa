@@ -55,15 +55,15 @@ module.exports = {
         .set("assets", resolve("src/assets"))
         .set("components", resolve("src/components"))
         .set("static", resolve("src/static"));
-    // 修改 Loader 选项
-    config.module
-      .rule("vue")
-      .use("vue-loader")
-      .loader("vue-loader")
-      .tap(options => {
-        // 修改它的选项...
-        return options;
-      });
+      // 修改 Loader 选项
+      config.module
+        .rule("vue")
+        .use("vue-loader")
+        .loader("vue-loader")
+        .tap(options => {
+          // 修改它的选项...
+          return options;
+        });
   },
   //调整 webpack 配置 https://cli.vuejs.org/zh/guide/webpack.html#%E7%AE%80%E5%8D%95%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F
   configureWebpack: config => {
@@ -99,12 +99,6 @@ module.exports = {
   // productionSourceMap：{ type:Bollean,default:true } 生产源映射
   // 如果您不需要生产时的源映射，那么将此设置为false可以加速生产构建
   productionSourceMap: false,
-  // 3个属性host,port,https
-  devServer:{
-    disableHostCheck: true, // 禁用webpack热重载检查 解决热更新失效问题
-    // hotOnly: true,
-  }, 
-  // 它支持webPack-dev-server的所有选项
   // css相关配置
   css: {
     // 是否使用css分离插件 ExtractTextPlugin
@@ -116,12 +110,15 @@ module.exports = {
     // 启用 CSS modules for all css / pre-processor files.
     modules: false
   },
+  // 3个属性host,port,https
+  // 它支持webPack-dev-server的所有选项
   devServer: {
     port: 8085, // 端口号
     // host: "localhost",
     host: "0.0.0.0",
     https: false, // https:{type:Boolean}
     open: true, //配置自动启动浏览器
+    disableHostCheck: true, // 禁用webpack热重载检查 解决热更新失效问题
     hotOnly: true, // 热更新
     proxy: "http://localhost:3000" // 配置跨域处理,只有一个代理
     // proxy: {
