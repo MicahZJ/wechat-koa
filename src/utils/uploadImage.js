@@ -59,8 +59,8 @@ export default class UploadImage {
     return new Promise((resolve, reject) => {
       let client = new OSS({
         region: "oss-cn-hangzhou",
-        accessKeyId: "LTAIvKSBsFk33DdS",
-        accessKeySecret: "HBhhN4hEq9qUL3ye6B6FcnFQXGZLMU",
+        accessKeyId: "",
+        accessKeySecret: "",
         bucket: "micahzj"
       });
       resolve(client);
@@ -80,11 +80,6 @@ export default class UploadImage {
       let fileName = "/images/" + randomStr + extensionName; // 文件名字（相对于根目录的路径 + 文件名）
       // 执行上传
       self.createOssClient().then(client => {
-        // 异步上传,返回数据
-        resolve({
-          fileName: file.name,
-          fileUrl: fileName
-        });
         // 上传处理
         // 分片上传文件
         client
@@ -98,9 +93,14 @@ export default class UploadImage {
           })
           .then(
             val => {
-              // console.info(val)
+              console.info(val);
               if (val.res.statusCode === 200) {
                 option.onSuccess(val);
+                // 异步上传,返回数据
+                resolve({
+                  fileName: file.name,
+                  fileUrl: val.res.requestUrls[0]
+                });
                 return val;
               } else {
                 option.onError("上传失败");
