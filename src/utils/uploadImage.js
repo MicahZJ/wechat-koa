@@ -3,7 +3,7 @@ import OSS from "ali-oss";
 export default class UploadImage {
   constructor() {}
   // 随机字符串
-  async randomString(num) {
+  randomString(num) {
     let chars = [
       "0",
       "1",
@@ -47,6 +47,7 @@ export default class UploadImage {
       var id = Math.ceil(Math.random() * 35);
       res += chars[id];
     }
+    console.log("res", res);
     return res;
   }
 
@@ -58,9 +59,9 @@ export default class UploadImage {
     return new Promise((resolve, reject) => {
       let client = new OSS({
         region: "oss-cn-hangzhou",
-        accessKeyId: "*",
-        accessKeySecret: "*",
-        bucket: "*"
+        accessKeyId: "LTAIvKSBsFk33DdS",
+        accessKeySecret: "HBhhN4hEq9qUL3ye6B6FcnFQXGZLMU",
+        bucket: "micahzj"
       });
       resolve(client);
     });
@@ -76,7 +77,7 @@ export default class UploadImage {
     return new Promise((resolve, reject) => {
       let randomStr = self.randomString(4); //  4位随机字符串
       let extensionName = file.name.substr(file.name.indexOf(".")); // 文件扩展名
-      let fileName = randomStr + extensionName; // 文件名字（相对于根目录的路径 + 文件名）
+      let fileName = "/images/" + randomStr + extensionName; // 文件名字（相对于根目录的路径 + 文件名）
       // 执行上传
       self.createOssClient().then(client => {
         // 异步上传,返回数据

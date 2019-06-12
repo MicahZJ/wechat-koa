@@ -1,3 +1,5 @@
+import OSS from '../../utils/uploadImage'
+
 export default {
   data() {
     return {
@@ -8,16 +10,18 @@ export default {
     /**
      * 获取上传之后的图片流
      */
-    coverUpLoad(options) { 
+    async coverUpLoad(options) {
+      console.log('image', options)
+      let oss = new OSS
+      let a = await oss.ossUploadFile(options)
     },
 
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
-
-      const isPNG = file.type === 'image/png';
+      // const isPNG = file.type === 'image/png';
       const isLt2M = file.size / 1024 / 1024 < 2;
 
-      if (!isJPG || !isPNG) {
+      if (!isJPG) {
         this.$message.error('上传头像图片只能是 JPG 或者 PNG 格式!');
       }
       if (!isLt2M) {

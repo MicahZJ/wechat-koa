@@ -58,8 +58,6 @@ export default {
         case 2: // 登出
           this.LoginOut();
           break;
-        default:
-          break;
       }
     },
 
@@ -95,8 +93,8 @@ export default {
      */
     toEditInfoPage() {
       this.$router.push({
-        path: '/edit'
-      })
+        path: "/edit"
+      });
     }
   }
 };
