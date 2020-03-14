@@ -7,7 +7,10 @@
 						<el-input type="text" v-model="userInfo.username" auto-complete="off" placeholder="请输入用户名"></el-input>
 					</el-form-item>
 					<el-form-item prop="pass">
-						<el-input type="password" v-model="userInfo.pass" auto-complete="off" placeholder="请输入密码"></el-input>
+						<el-input type="password" v-model="userInfo.pass" auto-complete="off" placeholder="请输入密码" show-password></el-input>
+					</el-form-item>
+					<el-form-item prop="pass">
+						<el-input type="password" v-model="userInfo.passVerification" auto-complete="off" placeholder="请再次输入密码" show-password></el-input>
 					</el-form-item>
 					<el-form-item>
 						<div class="operator">

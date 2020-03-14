@@ -1,4 +1,3 @@
-import { getLoginInfo } from '../../api/api'
 export default {
   data() {
     var checkName = (rule, value, callback) => {
@@ -19,7 +18,8 @@ export default {
     return {
       userInfo: {
         username: "",
-        pass: ""
+        pass: "",
+        passVerification: ""
       },
       rules: {
         username: [
@@ -38,43 +38,29 @@ export default {
     };
   },
   methods: {
-    Login(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          let userInfo = {
-            username: this.userInfo.username,
-            password: this.userInfo.pass
-          };
-          requestLogin(userInfo).then(data => {
-            let { msg, code, user } = data;
-            if (code !== 200) {
-              this.$message({
-                message: msg,
-                type: "error"
-              });
-            } else {
-              console.log(user);
-              sessionStorage.setItem("user", JSON.stringify(user));
-              this.$router.push({
-                path: "/dashboard"
-              });
-            }
-          });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
     async adminRegister() {
-      // let res = await getLoginInfo()
-      // console.log('数据', res)
-	    // this.$router.push({
-		  //   path: "/homepage"
-	    // });
+      if (this.userInfo.pass !== this.userInfo.passVerification) {
+        this.$message({
+          message: '密码验证错误，请重新输入',
+          type: 'warning'
+        });
+        return;
+      }
+      let api = '/api/registered'
+      let requestData = {
+        userEmail: this.userInfo.username,
+        passWord: this.userInfo.pass
+      }
+
+      let res = await this.$Http.axiosPost(api, requestData)
+      if (res.code === 200) {
+        this.$router.push({
+          path: "/login"
+        });
+      }
     }
   }
 };

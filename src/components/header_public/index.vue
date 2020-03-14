@@ -21,11 +21,14 @@
       <el-menu-item index="3">
         <a href="" target="_blank">关于我们</a>
       </el-menu-item>
-      <el-header style="text-align: right; font-size: 12px">
+      <el-header style="text-align: right; font-size: 12px;z-index: 2;">
         <el-dropdown @command="handleCommand">
-          <span class="heart-class"></span>
+          <!-- <span class="heart-class"></span> -->
+          <span class="el-dropdown-link" style="color: white;cursor: pointer">
+            下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="1">编辑</el-dropdown-item>
+            <!-- <el-dropdown-item command="1">编辑</el-dropdown-item> -->
             <el-dropdown-item command="2">登出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
