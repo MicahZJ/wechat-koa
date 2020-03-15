@@ -1,9 +1,9 @@
-import OSS from '../../utils/uploadImage'
+import OSS from "../../utils/uploadImage";
 
 export default {
   data() {
     return {
-      imageUrl: "",
+      imageUrl: ""
     };
   },
   methods: {
@@ -11,21 +11,21 @@ export default {
      * 获取上传之后的图片流
      */
     async coverUpLoad(options) {
-      console.log('image', options)
-      let oss = new OSS
-      let a = await oss.ossUploadFile(options)
+      console.log("image", options);
+      let oss = new OSS();
+      let a = await oss.ossUploadFile(options);
     },
 
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
+      const isJPG = file.type === "image/jpeg";
       // const isPNG = file.type === 'image/png';
       const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 或者 PNG 格式!');
+        this.$message.error("上传头像图片只能是 JPG 或者 PNG 格式!");
       }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+        this.$message.error("上传头像图片大小不能超过 2MB!");
       }
       return isJPG && isLt2M;
     }
@@ -55,7 +55,6 @@ export default {
      * 实例挂载之后调用，但是并不是所有子组件也都一起挂载完成
      */
     console.log("5. mounted");
-
   },
   beforeUpdate() {
     /*

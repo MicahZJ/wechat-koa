@@ -13,6 +13,20 @@ export default {
   },
   methods: {
     /**
+     * 设置警报level样式
+     */
+    tableRowClassName({ row, rowIndex }) {
+      // console.log("row", rowIndex, row.alarm_level);
+      if (row.alarm_level === 1) {
+        return "serious-row";
+      } else if (row.alarm_level === 2) {
+        return "warning-row";
+      } else {
+        return "";
+      }
+    },
+
+    /**
      *  当前选中
      * @param key
      */
@@ -68,14 +82,15 @@ export default {
     // 格式化数组
     formatList(arr) {
       let newArr = [];
-      arr.map((item, index) => {
+      arr.map(item => {
         newArr.push({
           id: item.id,
-          date: item.create_time,
-          name: item.author,
-          title: item.article_title,
-          tag: item.hidden,
-          article: item.article
+          unit_name: item.unit_name,
+          telephone: item.telephone,
+          registered_time: item.registered_time,
+          contract_time: item.contract_time,
+          remarks: item.remarks,
+          alarm_level: item.alarm_level
         });
       });
       return newArr;
@@ -96,17 +111,58 @@ export default {
     toEditPage(row) {
       console.log("当前数据", row);
       this.$router.push({
-        path: "/editInfo",
+        path: "/editArticle",
         query: {
           options: row
         }
       });
     },
 
+    // 确认更新
+    confirmDelete(row, index) {
+      this.$confirm("此操作会更新状态， 是否继续?", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        console.log(row, index);
+        this.changeAlarmStatus(row)
+      })
+      .catch(() => {
+        this.$refs.multipleTable.clearSelection();
+        this.$message({
+          type: "info",
+          message: "已取消"
+        });
+      });
+    },
+
+    /**
+     * 更新警报状态
+     * @param {} row 
+     */
+    async changeAlarmStatus(row) {
+      let api = "/api/activity/change_alarm_level";
+      let requestData = {
+        id: row.id,
+        unit_name: row.unit_name,
+        alarm_level: 3
+      }
+
+      let res = await this.$Http.axiosPost(api, requestData)
+      if (res.code === 200) {
+        row.alarm_level = 3
+        this.$message({
+          type: "success",
+          message: "更新成功"
+        });
+      }
+    },
+
     /**
      * 删除当前数据
      */
-    async deleteInfo(row) {
+    async deleteInfo(row, index) {
       console.log("当前数据", row);
       let Api = `/api/activity/delete`;
       let requestData = {
@@ -117,13 +173,10 @@ export default {
 
       const res = await this.$Http.axiosPost(Api, requestData);
       if (res.code === 200) {
-        this.$alert("恭喜大王，已经删除成功", "删除结果", {
-          confirmButtonText: "已阅",
-          callback: action => {
-            setTimeout(() => {
-              this.getArticleList();
-            }, 500);
-          }
+        this.tables.splice(index, 1)
+        this.$message({
+          type: "success",
+          message: "删除成功!"
         });
       }
     },
@@ -138,7 +191,7 @@ export default {
         arr.push(row.id);
         this.$refs.multipleTable.toggleRowSelection(row);
       });
-      this.$confirm("大王,此操作会删除已选中的数据哦， 是否继续?", "橙色警告", {
+      this.$confirm("此操作会删除已选中的数据， 是否继续?", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -169,7 +222,7 @@ export default {
         arr.push(row.id);
         this.$refs.multipleTable.toggleRowSelection(row);
       });
-      this.$confirm("大王,此操作会删除整页数据哦， 是否继续?", "红色警告", {
+      this.$confirm("此操作会删除整页数据， 是否继续?", "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"

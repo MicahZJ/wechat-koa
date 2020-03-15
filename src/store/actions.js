@@ -29,7 +29,10 @@ export const login = ({ commit }, data) => {
             {},
             resP.data.id + " " + resP.data.loginToken
           );
-          let userInfo = Object.assign({}, { nick: resP.data.nick, id: resP.data.id});
+          let userInfo = Object.assign(
+            {},
+            { nick: resP.data.nick, id: resP.data.id }
+          );
           commit(types.SET_TOKEN, token);
           commit(types.SET_USERINFO, userInfo);
         }
@@ -46,8 +49,8 @@ export const login = ({ commit }, data) => {
 export const loginOut = async ({ commit }) => {
   return new Promise((resolve, reject) => {
     commit(types.SET_TOKEN, "");
-    localStorage.removeItem("token")
-    delete axios.defaults.headers.common['Authorization']
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["Authorization"];
     resolve(true);
   });
 };

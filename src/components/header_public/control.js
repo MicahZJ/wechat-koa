@@ -65,7 +65,7 @@ export default {
      * 登出
      */
     LoginOut() {
-      this.$confirm("登出将失去异界主角光环, 是否继续?", "提示", {
+      this.$confirm("即将退出, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -73,7 +73,7 @@ export default {
         .then(async () => {
           this.$message({
             type: "success",
-            message: "你终于还是成为了路人甲!"
+            message: "成功退出!"
           });
           if (await this.loginOut())
             this.$router.replace({
@@ -83,7 +83,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "阔以，你现在还是主角!"
+            message: "已取消退出!"
           });
         });
     },

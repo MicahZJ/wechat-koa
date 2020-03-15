@@ -5,7 +5,8 @@ class Http {
   constructor() {}
 
   async axiosGet(url, params) {
-    axios.defaults.headers.common['Authorization'] = 'token '+ localStorage.getItem('token');
+    axios.defaults.headers.common["Authorization"] =
+      "token " + localStorage.getItem("token");
     url = webConfig.apiPath + url;
 
     return axios
@@ -20,7 +21,8 @@ class Http {
   }
 
   async axiosPost(url, params) {
-    axios.defaults.headers.common['Authorization'] = 'token '+ localStorage.getItem('token');
+    axios.defaults.headers.common["Authorization"] =
+      "token " + localStorage.getItem("token");
     url = webConfig.apiPath + url;
 
     return axios

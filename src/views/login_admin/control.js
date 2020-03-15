@@ -44,6 +44,20 @@ export default {
      * @returns {Promise<void>}
      */
     async adminLogin() {
+      if (this.userInfo.username === '') {
+        this.$message({
+          type: "warning",
+          message: "用户名未填写"
+        });
+        return
+      }
+      if (this.userInfo.pass === '') {
+        this.$message({
+          type: "warning",
+          message: "密码未填写"
+        });
+        return
+      }
       let requestData = {
         userEmail: this.userInfo.username,
         passWord: this.userInfo.pass
@@ -56,7 +70,11 @@ export default {
           path: "/homepage"
         });
       } else {
-        alert(`${res.message}`);
+        this.$alert('', `${res.message}`, {
+          confirmButtonText: '确定',
+          callback: action => {
+          }
+        });
       }
 
       // this.setInfo(newUserInfo)
@@ -78,8 +96,8 @@ export default {
      */
     async signIn() {
       this.$router.push({
-        path: '/register'
-      })
-    },
+        path: "/register"
+      });
+    }
   }
 };
