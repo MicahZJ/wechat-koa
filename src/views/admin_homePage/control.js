@@ -65,7 +65,7 @@ export default {
      * 获取列表数据
      */
     async getArticleList() {
-      let Api = "/api/activity/article";
+      let Api = "/api/activity/record_list";
       let requestData = {
         page: this.pages,
         limit: 10
@@ -89,6 +89,7 @@ export default {
           telephone: item.telephone,
           registered_time: item.registered_time,
           contract_time: item.contract_time,
+          maintain_time: item.maintain_time,
           remarks: item.remarks,
           alarm_level: item.alarm_level
         });
@@ -119,8 +120,8 @@ export default {
     },
 
     // 确认更新
-    confirmDelete(row, index) {
-      this.$confirm("此操作会更新状态， 是否继续?", "警告", {
+    confirmStatus(row, index) {
+      this.$confirm(`此操作会更新（${row.unit_name}）的维保日期， 是否继续?`, "警告", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -151,7 +152,7 @@ export default {
 
       let res = await this.$Http.axiosPost(api, requestData)
       if (res.code === 200) {
-        row.alarm_level = 3
+        this.getArticleList();
         this.$message({
           type: "success",
           message: "更新成功"

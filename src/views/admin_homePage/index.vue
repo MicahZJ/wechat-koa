@@ -74,6 +74,11 @@
         label="合同日期"
         sortable
       ></el-table-column>
+      <el-table-column
+        prop="maintain_time"
+        label="维保日期"
+        sortable
+      ></el-table-column>
       <el-table-column prop="remarks" label="备注"></el-table-column>
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">
@@ -92,8 +97,8 @@
             type="info"
             icon="el-icon-s-promotion"
             size="mini"
-            @click="confirmDelete(scope.row, scope.$index)"
-            >更新状态</el-button
+            @click="confirmStatus(scope.row, scope.$index)"
+            >维保完成</el-button
           >
         </template>
       </el-table-column>

@@ -28,6 +28,17 @@
           </el-date-picker>
         </el-col>
       </el-form-item>
+      <el-form-item label="维保日期" prop="maintain_time">
+        <el-col :span="3">
+          <el-date-picker
+            v-model="rulesForm.maintain_time"
+            type="date"
+            :disabled="true"
+            placeholder="选择日期"
+          >
+          </el-date-picker>
+        </el-col>
+      </el-form-item>
       <el-form-item label="备注">
         <el-input v-model="rulesForm.remarks"></el-input>
       </el-form-item>

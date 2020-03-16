@@ -16,6 +16,7 @@ export default {
         telephone: "",
         registered_time: "",
         contract_time: "",
+        maintain_time: "",
         remarks: ""
       },
       rules: {
@@ -38,6 +39,12 @@ export default {
           }
         ],
         contract_time: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        maintain_time: [
           {
             validator: checkContent,
             trigger: "blur"
@@ -73,7 +80,8 @@ export default {
       this.rulesForm.registered_time = options.registered_time;
       this.rulesForm.unit_name = options.unit_name;
 			this.rulesForm.contract_time = options.contract_time;
-			this.rulesForm.remarks = options.remarks;
+      this.rulesForm.maintain_time = options.maintain_time;
+      this.rulesForm.remarks = options.remarks;
     },
 
     /**
@@ -104,6 +112,34 @@ export default {
      * 保存新数据
      */
     async saveNewData() {
+      if (this.rulesForm.unit_name === '') {
+        this.$message({
+          type: "warning",
+          message: "单位名称未填写"
+        });
+        return
+      }
+      if (this.rulesForm.telephone === '') {
+        this.$message({
+          type: "warning",
+          message: "联系电话未填写"
+        });
+        return
+      }
+      if (this.rulesForm.registered_time === '') {
+        this.$message({
+          type: "warning",
+          message: "注册日期未填写"
+        });
+        return
+      }
+      if (this.rulesForm.contract_time === '') {
+        this.$message({
+          type: "warning",
+          message: "合同日期未填写"
+        });
+        return
+      }
       let Api = "/api/activity/edit";
       let requestData = {
         id: this.id,

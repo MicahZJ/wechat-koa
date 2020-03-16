@@ -15,6 +15,7 @@ export default {
         telephone: "",
         registered_time: "",
         contract_time: "",
+        maintain_time: "",
         remarks: ""
       },
       rules: {
@@ -37,6 +38,12 @@ export default {
           }
         ],
         contract_time: [
+          {
+            validator: checkContent,
+            trigger: "blur"
+          }
+        ],
+        maintain_time: [
           {
             validator: checkContent,
             trigger: "blur"
@@ -120,6 +127,13 @@ export default {
         });
         return
       }
+      if (this.ruleForm.maintain_time === '') {
+        this.$message({
+          type: "warning",
+          message: "维保日期未填写"
+        });
+        return
+      }
       let Api = "/api/activity/addNew";
       let requestData = {
         contract_time: this.ruleForm.contract_time,
@@ -127,6 +141,7 @@ export default {
         registered_time: this.formatDate(this.ruleForm.registered_time),
         unit_name: this.ruleForm.unit_name,
         contract_time: this.formatDate(this.ruleForm.contract_time),
+        maintain_time: this.formatDate(this.ruleForm.maintain_time),
         remarks: this.ruleForm.remarks,
         status: 1,
         alarm_level: 3
