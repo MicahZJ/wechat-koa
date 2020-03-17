@@ -66,7 +66,7 @@
       <el-table-column prop="telephone" label="联系电话"> </el-table-column>
       <el-table-column
         prop="registered_time"
-        label="注册日期"
+        label="年检日期"
         sortable
       ></el-table-column>
       <el-table-column
