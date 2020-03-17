@@ -8,7 +8,7 @@
       <el-form-item label="联系电话" prop="telephone">
         <el-input v-model="ruleForm.telephone" maxlength="11"></el-input>
       </el-form-item>
-      <el-form-item label="注册日期" prop="registered_time">
+      <el-form-item label="年检日期" prop="registered_time">
         <el-col :span="3">
           <el-date-picker v-model="ruleForm.registered_time" type="date" placeholder="选择日期">
           </el-date-picker>

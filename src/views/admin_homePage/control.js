@@ -147,6 +147,7 @@ export default {
       let requestData = {
         id: row.id,
         unit_name: row.unit_name,
+        maintain_time: row.maintain_time,
         alarm_level: 3
       }
 
