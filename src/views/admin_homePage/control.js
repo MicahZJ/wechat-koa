@@ -8,10 +8,31 @@ export default {
       selectData: [], // 选中数据
       totalLength: 10, // 纵数据数量
       search: "", //查询输入框数据
-      pages: 1 // 初始页
+      pages: 1, // 初始页
+      row: {}, // 当前行信息
+      valueMaintain: "",
+      showBlock: false,
     };
   },
+  wather: {
+    valueMaintain: {
+      handler(newV, oldV) {
+
+      },
+      deep: true
+    }
+  },
   methods: {
+    /**
+     * 添加列样式
+     * @param {table} param0 
+     */
+    addClass({columnIndex}){
+      if(columnIndex === 3){
+        return 'cell-special'
+      }    
+    },
+
     /**
      * 设置警报level样式
      */
@@ -119,6 +140,43 @@ export default {
       });
     },
 
+    /**
+     * 确认时间
+     */
+    clickBlock(falg) {
+      this.showBlock = false
+      if (falg) {
+        console.log('time', this.formatDate(this.valueMaintain))
+        this.changeAlarmStatus()
+      } else {
+        this.valueMaintain = ''
+      }
+    },
+
+    /**
+     * 时间日期格式化
+     * @param format
+     * @returns {*}
+     */
+    formatDate(timestamp) {
+      var date = new Date(timestamp); //时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let Y = date.getFullYear();
+      let M =
+        date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1;
+      let D = date.getDate();
+      let h = date.getHours();
+      let m = date.getMinutes();
+      let s = date.getSeconds();
+      M = M.toString().length < 2 ? "0" + M : M;
+      D = D.toString().length < 2 ? "0" + D : D;
+      h = h.toString().length < 2 ? "0" + h : h;
+      m = m.toString().length < 2 ? "0" + m : m;
+      s = s.toString().length < 2 ? "0" + s : s;
+      return Y + "-" + M + "-" + D;
+    },
+
     // 确认更新
     confirmStatus(row, index) {
       this.$confirm(`此操作会更新（${row.unit_name}）的维保日期， 是否继续?`, "警告", {
@@ -127,7 +185,10 @@ export default {
         type: "warning"
       }).then(() => {
         console.log(row, index);
-        this.changeAlarmStatus(row)
+        this.showBlock = true
+        this.row = []
+        this.row = row
+        // this.changeAlarmStatus(row)
       })
       .catch(() => {
         this.$refs.multipleTable.clearSelection();
@@ -142,17 +203,17 @@ export default {
      * 更新警报状态
      * @param {} row 
      */
-    async changeAlarmStatus(row) {
+    async changeAlarmStatus() {
       let api = "/api/activity/change_alarm_level";
       let requestData = {
-        id: row.id,
-        unit_name: row.unit_name,
-        maintain_time: row.maintain_time,
+        id: this.row.id,
+        unit_name: this.row.unit_name,
+        maintain_time: this.formatDate(this.valueMaintain),
         alarm_level: 3
       }
-
       let res = await this.$Http.axiosPost(api, requestData)
       if (res.code === 200) {
+        this.valueMaintain = ''
         this.getArticleList();
         this.$message({
           type: "success",

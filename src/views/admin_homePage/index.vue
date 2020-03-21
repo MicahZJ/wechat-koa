@@ -1,6 +1,15 @@
 <template>
-  <div>
+  <div id="home-wrapper">
     <public-header />
+    <div class="block" v-if="showBlock">
+      <el-date-picker
+        v-model="valueMaintain"
+        type="date"
+        placeholder="选择日期">
+      </el-date-picker>
+      <el-button @click="clickBlock(false)">取消</el-button>
+      <el-button @click="clickBlock(true)">确认</el-button>
+    </div>
     <!--搜索框-->
     <el-row>
       <el-col :span="2" class="grid">
@@ -9,8 +18,7 @@
           icon="el-icon-search"
           size="mini"
           @click="handleSearch()"
-          >搜索</el-button
-        >
+          >搜索</el-button>
       </el-col>
       <el-col :span="3" class="grid">
         <el-input v-model="search" placeholder="请输入单位名称" size="mini">
@@ -53,6 +61,7 @@
       :data="tables"
       border
       style="width: 100%"
+      :cell-class-name="addClass"
       ref="multipleTable"
       tooltip-effect="dark"
       :row-class-name="tableRowClassName"
@@ -63,7 +72,11 @@
       <!--索引-->
       <el-table-column type="index" :index="indexMethod"></el-table-column>
       <el-table-column prop="unit_name" label="单位名称"></el-table-column>
-      <el-table-column prop="telephone" label="联系电话"> </el-table-column>
+      <el-table-column
+        prop="maintain_time"
+        label="维保日期"
+        sortable
+      ></el-table-column>
       <el-table-column
         prop="registered_time"
         label="年检日期"
@@ -74,11 +87,7 @@
         label="合同日期"
         sortable
       ></el-table-column>
-      <el-table-column
-        prop="maintain_time"
-        label="维保日期"
-        sortable
-      ></el-table-column>
+      <el-table-column prop="telephone" label="联系电话"> </el-table-column>
       <el-table-column prop="remarks" label="备注"></el-table-column>
       <el-table-column label="操作" width="100">
         <template slot-scope="scope">
