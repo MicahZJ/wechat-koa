@@ -1,6 +1,7 @@
 <template>
   <div id="home-wrapper">
     <public-header />
+    <!-- <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop> -->
     <div class="block" v-if="showBlock">
       <el-date-picker
         v-model="valueMaintain"
@@ -115,12 +116,12 @@
     <br />
     <br />
     <!--分页条-->
-    <el-pagination
+    <!-- <el-pagination
       background
       layout="prev, pager, next"
       :total="this.totalLength"
       @current-change="handleCurrentChange"
-    ></el-pagination>
+    ></el-pagination> -->
   </div>
 </template>
 

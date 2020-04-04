@@ -10,6 +10,9 @@ Vue.config.productionTip = false;
 Vue.prototype.$Axios = axios;
 Vue.prototype.$Http = Http;
 
+// import elTableInfiniteScroll from 'el-table-infinite-scroll';
+// Vue.use(elTableInfiniteScroll);
+
 new Vue({
   router,
   store,

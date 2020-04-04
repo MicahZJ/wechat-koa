@@ -1,7 +1,11 @@
 import { mapGetters } from "vuex";
 import publicHeader from "components/header_public/index";
+// import elTableInfiniteScroll from 'el-table-infinite-scroll';
 
 export default {
+  // directives: {
+  //   'el-table-infinite-scroll': elTableInfiniteScroll
+  // },
   data() {
     return {
       tableData: [], // 当前页所有数据
@@ -71,7 +75,11 @@ export default {
      */
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-      this.pages = val;
+    },
+
+    load () {
+      console.log(23232323)
+      this.pages += 1;
       this.getArticleList();
     },
 
@@ -89,7 +97,7 @@ export default {
       let Api = "/api/activity/record_list";
       let requestData = {
         page: this.pages,
-        limit: 10
+        limit: 12
       };
 
       const res = await this.$Http.axiosPost(Api, requestData);
@@ -112,7 +120,9 @@ export default {
           contract_time: item.contract_time,
           maintain_time: item.maintain_time,
           remarks: item.remarks,
-          alarm_level: item.alarm_level
+          alarm_level: item.alarm_level,
+          alarm14:item.alarm14,
+          alarm15:item.alarm15
         });
       });
       return newArr;
@@ -208,6 +218,8 @@ export default {
       let requestData = {
         id: this.row.id,
         unit_name: this.row.unit_name,
+        alarm14: this.row.alarm14,
+        alarm15: this.row.alarm15,
         maintain_time: this.formatDate(this.valueMaintain),
         alarm_level: 3
       }
