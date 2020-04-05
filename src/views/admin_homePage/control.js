@@ -32,7 +32,7 @@ export default {
      * @param {table} param0 
      */
     addClass({columnIndex}){
-      if(columnIndex === 3){
+      if(columnIndex === 3 || columnIndex === 2){
         return 'cell-special'
       }    
     },
